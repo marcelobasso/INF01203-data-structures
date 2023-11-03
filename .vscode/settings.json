@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.heex": "html-eex",
+        "double-linked-list.h": "c"
+    }
+}
