@@ -13,9 +13,9 @@ void imprimeMenu(void) {
     printf("F - inserir um elemento no final da lista\n");
     printf("A - inserir um elemento após o codigo desejado\n");
     printf("T - inverter a posicao de dois elementos informados\n");
-    printf("DF - remover o primeiro elemento da lista\n");
-    printf("DL - remover o último elemento da lista\n");
-    printf("DN - remover o elemento N da lista\n");
+    printf("D - remover o primeiro elemento da lista\n");
+    printf("P - remover o último elemento da lista\n");
+    printf("N - remover o elemento N da lista\n");
     printf("S - sair\n");
     printf("\nOpcao desejada: ");
 }
@@ -39,6 +39,39 @@ void imprimeListaRec(Node* primeiro_el) {
         printf("Nome: %s", primeiro_el->info.nome);
         printf("Codigo: %d\n", primeiro_el->info.codigo);
         imprimeListaRec(primeiro_el->proximo);
+    }
+}
+
+void imprimeListaReverse(Node* primeiro_el) {
+    if (primeiro_el) {
+        imprimeListaReverse(primeiro_el->proximo);
+        printf(HORIZONTAL_LINE);
+        printf("Nome: %s", primeiro_el->info.nome);
+        printf("Codigo: %d\n", primeiro_el->info.codigo);
+    }
+}
+
+void imprimeListaReversePointers(Node* primeiro_el) {
+    Node *ptAux;
+
+    if (primeiro_el) {
+        // caminha ate o ultimo elemento
+        while (primeiro_el->proximo) {
+            primeiro_el = primeiro_el->proximo;
+        }
+
+        // imprime o último elemento
+        printf(HORIZONTAL_LINE);
+        printf("Nome: %s", primeiro_el->info.nome);
+        printf("Codigo: %d\n", primeiro_el->info.codigo);
+        
+        // exibe os elementos de trás pra frente
+        while (primeiro_el->anterior) {
+            primeiro_el = primeiro_el->anterior;
+            printf(HORIZONTAL_LINE);
+            printf("Nome: %s", primeiro_el->info.nome);
+            printf("Codigo: %d\n", primeiro_el->info.codigo);
+        }
     }
 }
 
@@ -71,7 +104,7 @@ Node* insereFinal(Node *primeiro_el, NodeInfo info) {
         novo_el->anterior = NULL;
     } else {
         // encontra o último elemento
-        for (ptAux = primeiro_el; ptAux; ptAux = ptAux->proximo);
+        for (ptAux = primeiro_el; ptAux->proximo; ptAux = ptAux->proximo);
 
         ptAux->proximo = novo_el;
         novo_el->anterior = ptAux;
@@ -80,6 +113,11 @@ Node* insereFinal(Node *primeiro_el, NodeInfo info) {
     return primeiro_el;
 }
 
+Node* inverteElementos(Node *primeiro_el, int cod_1, int cod_2) {
+
+}
+
+// FUNCAO COM BUG
 Node* insereAposCodigo(Node *primeiro_el, NodeInfo info, int codigo) {
     Node *novo_el, *ptAux;
 
@@ -102,9 +140,35 @@ Node* insereAposCodigo(Node *primeiro_el, NodeInfo info, int codigo) {
     }
 }
 
+Node* removePrimeiro(Node *primeiro_el) {
+    Node *retorno = NULL;
 
+    if (primeiro_el) {
+        if (primeiro_el->proximo) {
+            primeiro_el->proximo->anterior = NULL;
+            
+            retorno = primeiro_el->proximo;
+        }
 
+        free(primeiro_el);        
+    }
 
+    return retorno;
+}
+
+void removeUltimo(Node *primeiro_el) {
+    while (primeiro_el && primeiro_el->proximo) {
+        primeiro_el = primeiro_el->proximo;
+    }
+
+    if (primeiro_el) {
+        if (primeiro_el->anterior) {
+            primeiro_el->anterior->proximo = NULL;
+        }
+        
+        free(primeiro_el);
+    }
+}
 
 
 
