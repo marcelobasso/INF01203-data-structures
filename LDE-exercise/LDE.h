@@ -20,6 +20,8 @@ Node* IniciaLista(void);
 // Insere um elemento no final da lista.
 Node* Inserir(Node *primeiro_el, NodeInfo info);
 
+Node* InserirOrd(Node *primeiro_el, NodeInfo info);
+
 // Imprime todos os elementos da lista;
 void Imprimir(Node *primeiro_el);
 

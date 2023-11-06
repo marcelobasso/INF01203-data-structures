@@ -28,6 +28,46 @@ Node* Inserir(Node *primeiro_el, NodeInfo info) {
     return primeiro_el;
 }
 
+Node* InserirOrd(Node *primeiro_el, NodeInfo info) {
+    Node *novo_elemento = malloc(sizeof(Node));
+    Node *ptAux = primeiro_el;
+
+    novo_elemento->info = info;
+
+    if (ptAux) {
+        // menor do q 1° el
+        if (novo_elemento->info.codigo < ptAux->info.codigo) {
+            novo_elemento->anterior = NULL;
+            novo_elemento->proximo = ptAux;
+            ptAux->anterior = novo_elemento;
+            primeiro_el = novo_elemento;
+        } else {
+            while (ptAux->proximo && ptAux->proximo->info.codigo < novo_elemento->info.codigo) {
+                ptAux = ptAux->proximo;
+            }
+
+            if (ptAux->proximo) {
+                // inserir no meio
+                novo_elemento->anterior = ptAux;
+                novo_elemento->proximo = ptAux->proximo;
+                ptAux->proximo = novo_elemento;
+                ptAux->proximo->anterior = novo_elemento;
+            } else {
+                // inserir no fim
+                novo_elemento->anterior = ptAux;
+                novo_elemento->proximo = NULL;
+                ptAux->proximo = novo_elemento;
+            }
+        }
+    } else {
+        novo_elemento->proximo = NULL;
+        novo_elemento->anterior = NULL;
+        primeiro_el = novo_elemento;
+    }
+
+    return primeiro_el;
+}
+
 void Imprimir(Node *primeiro_el) {
     if (primeiro_el) {
         ImprimeElemento(primeiro_el->info);
@@ -38,7 +78,7 @@ void Imprimir(Node *primeiro_el) {
 
 void ImprimirReverso(Node *primeiro_el) {
     if (primeiro_el) {
-        Imprimir(primeiro_el->proximo);
+        ImprimirReverso(primeiro_el->proximo);
         ImprimeElemento(primeiro_el->info);
     } else
         printf("\n%s", LINE);
@@ -54,16 +94,18 @@ Node* Remover(Node *primeiro_el, int codigo) {
     if (ptAux == NULL) {
         printf("\n**codigo nao encontrado.");
     } else {
-        if (ptAux->anterior && ptAux->proximo) {
-                ptAux->anterior->proximo = ptAux->proximo;
-                ptAux->proximo->anterior = ptAux->anterior;
-        } else {
-            if (ptAux->anterior) {
-                ptAux->anterior->proximo = NULL;
-            } else if(ptAux->proximo) {
+        if (!ptAux->anterior) {
+            // primeiro elemento
+            primeiro_el = ptAux->proximo;
+            if (ptAux->proximo) {
                 ptAux->proximo->anterior = NULL;
-                primeiro_el = ptAux->proximo;
             }
+        } else {
+            ptAux->anterior->proximo = ptAux->proximo;
+        }
+
+        if (ptAux->proximo) {
+            ptAux->proximo->anterior = ptAux->anterior;
         }
 
         free(ptAux);

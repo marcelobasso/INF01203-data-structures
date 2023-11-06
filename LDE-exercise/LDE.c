@@ -19,7 +19,7 @@ int main() {
             case 'N':
             case 'n':
                 NovoElemento(&novo_el_info);
-                primeiro_el = Inserir(primeiro_el, novo_el_info);
+                primeiro_el = InserirOrd(primeiro_el, novo_el_info);
                 break;
 
             case 'I':
