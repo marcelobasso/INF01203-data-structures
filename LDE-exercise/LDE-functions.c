@@ -60,7 +60,7 @@ Node* Remover(Node *primeiro_el, int codigo) {
         } else {
             if (ptAux->anterior) {
                 ptAux->anterior->proximo = NULL;
-            } else {
+            } else if(ptAux->proximo) {
                 ptAux->proximo->anterior = NULL;
                 primeiro_el = ptAux->proximo;
             }
@@ -99,7 +99,7 @@ void Menu(void) {
     printf("\nJ - imprimir reversa");
     printf("\nR - remover elemento");
     printf("\nD - destruir");
-    printf("\nQ - sair");
+    printf("\nS - sair");
     printf("\nDigite a opcao desejada: ");
 }
 
