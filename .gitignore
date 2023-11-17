@@ -2,5 +2,6 @@
 *
 # Unignore all with extensions
 !*.*
+*.zip
 # Unignore all dirs
 !*/
