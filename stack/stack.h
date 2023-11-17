@@ -24,3 +24,5 @@ void DestroiPilha(Stack **Topo);
 
 // retorna 1 se as pilhas forem iguais, 0 caso contrário.
 int ComparaPilhas(Stack *S1, Stack *S2);
+
+void ImprimirPilha (Stack *Topo);

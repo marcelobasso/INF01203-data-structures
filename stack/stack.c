@@ -36,7 +36,6 @@ void PushPilha(Stack **Topo, int Dado) {
     novo->dado = Dado;
     novo->prox = *Topo;
 
-    /*retorna novo topo */
     *Topo = novo;
 }
 
@@ -56,12 +55,27 @@ void DestroiPilha(Stack **Topo) {
     *Topo = NULL;
 }
 
+void ImprimirPilha(Stack *Topo) {
+     Stack *ptaux;
+
+     if (Topo != NULL) {
+        puts("---Imprimindo pilha---");
+        for (ptaux=Topo; ptaux!=NULL; ptaux=ptaux->prox)
+            printf("%d\n",ptaux->dado);
+        puts("-------Fim pilha------");
+     } else
+       puts("Pilha vazia");
+
+}
+
 int ComparaPilhas(Stack *S1, Stack *S2) {
     int dado1, dado2, igual = 1;
 
     while (PopPilha(&S1, &dado1) && PopPilha(&S2, &dado2) && igual) {
-        igual = dado1 == dado2;
+        if (dado1 != dado2) break;
     }
+    // compara os ultimos dados extraídos 
+    igual = dado1 == dado2;
 
     return PilhaVazia(S1) && PilhaVazia(S2) && igual;
 }
