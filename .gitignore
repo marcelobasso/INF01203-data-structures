@@ -5,3 +5,5 @@
 *.zip
 # Unignore all dirs
 !*/
+# Unignore makefiles
+!makefile
