@@ -1,0 +1,29 @@
+Calorias calculadas para day1.csv usando 1000shuffled.csv.
+
+150g de activia (74 calorias por 100g) = 111 calorias
+110g de tangerine (53 calorias por 100g) = 58 calorias
+120g de bagel (257 calorias por 100g) = 308 calorias
+200g de coffee (1 calorias por 100g) = 2 calorias
+200g de beef fillet (189 calorias por 100g) = 378 calorias
+150g de rigatoni (353 calorias por 100g) = 529 calorias
+100g de banoffee pie (395 calorias por 100g) = 395 calorias
+50g de arugula (25 calorias por 100g) = 12 calorias
+5g de caesar dressing (429 calorias por 100g) = 21 calorias
+30g de camembert (300 calorias por 100g) = 90 calorias
+50g de chocolate (529 calorias por 100g) = 264 calorias
+200g de white wine (82 calorias por 100g) = 164 calorias
+
+Total de 2332 calorias consumidas no dia.
+
+========  ESTATÍSTICAS ABP ============
+Numero de Nodos: 1000
+Altura: 22
+Rotações: 0
+Comparações: 310
+
+
+========  ESTATÍSTICAS AVL ============
+Numero de Nodos: 1000
+Altura 12
+Rotações: 449
+Comparações: 248
