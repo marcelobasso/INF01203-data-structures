@@ -4,5 +4,5 @@
 #endif
 
 Nodo *cria_arvore(void);
-Nodo *consultaABP(Nodo *a, char nome[MAX_NOME], int calorias);
+Nodo *consultaABP(Nodo *a, char nome[MAX_NOME]);
 Nodo *InsereAbp(Nodo *a, Dados dados);

@@ -7,15 +7,15 @@ Nodo *cria_arvore(void) {
     return NULL;
 }
 
-Nodo *consultaABP(Nodo *a, char nome[MAX_NOME], int calorias) {
+Nodo *consultaABP(Nodo *a, char nome[MAX_NOME]) {
     if (a == NULL)
         return NULL;
     else if (!strcmp(a->dados.nome, nome))
         return a;
-    else if (a->dados.calorias > calorias)
-        return consultaABP(a->esq, nome, calorias);
+    else if (strcmp(a->dados.nome, nome) > 0)
+        return consultaABP(a->esq, nome);
     else
-        return consultaABP(a->dir, nome, calorias);
+        return consultaABP(a->dir, nome);
 }
 
 Nodo *InsereAbp(Nodo *a, Dados dados) {

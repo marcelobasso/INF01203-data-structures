@@ -4,7 +4,7 @@
 #include <string.h>
 
 // fator positivo e sua subárvore da esquerda também tem um fator positivo
-Nodo *rotacao_direita(Nodo *p) {
+Nodo *rotacao_direita(Nodo *p, int *rotacoes) {
     Nodo *u;
 
     u = p->esq;
@@ -12,12 +12,13 @@ Nodo *rotacao_direita(Nodo *p) {
     u->dir = p;
     p->fator = 0;
     p = u;
+    (*rotacoes)++;
 
     return p;
 }
 
 // fator negativo e sua subárvore da direita também tem um fator negativo
-Nodo *rotacao_esquerda(Nodo *p) {
+Nodo *rotacao_esquerda(Nodo *p, int *rotacoes) {
     Nodo *z;
 
     z = p->dir;
@@ -25,12 +26,13 @@ Nodo *rotacao_esquerda(Nodo *p) {
     z->esq = p;
     p->fator = 0;
     p = z;
+    (*rotacoes)++;
 
     return p;
 }
 
 // fator positivo e sua subárvore da esquerda tem um fator negativo
-Nodo *rotacao_dupla_direita(Nodo *p) {
+Nodo *rotacao_dupla_direita(Nodo *p, int *rotacoes) {
     Nodo *u, *v;
 
     u = p->esq;
@@ -51,12 +53,13 @@ Nodo *rotacao_dupla_direita(Nodo *p) {
         u->fator = 0;
 
     p = v;
+    (*rotacoes)++;
 
     return p;
 }
 
 // fator negativo e sua subárvore da direita tem um fator positivo
-Nodo *rotacao_dupla_esquerda(Nodo *p) {
+Nodo *rotacao_dupla_esquerda(Nodo *p, int *rotacoes) {
     Nodo *z, *y;
 
     z = p->dir;
@@ -77,18 +80,19 @@ Nodo *rotacao_dupla_esquerda(Nodo *p) {
         z->fator = 0;
 
     p = y;
+    (*rotacoes)++;
 
     return p;
 }
 
-Nodo *Caso1(Nodo *a, int *ok) {
+Nodo *Caso1(Nodo *a, int *ok, int *rotacoes) {
     Nodo *z;
 
     z = a->esq;
     if (z->fator == 1)
-        a = rotacao_direita(a);
+        a = rotacao_direita(a, rotacoes);
     else
-        a = rotacao_dupla_direita(a);
+        a = rotacao_dupla_direita(a, rotacoes);
 
     a->fator = 0;
     *ok = 0;
@@ -96,14 +100,14 @@ Nodo *Caso1(Nodo *a, int *ok) {
     return a;
 }
 
-Nodo *Caso2(Nodo *a, int *ok) {
+Nodo *Caso2(Nodo *a, int *ok, int *rotacoes) {
     Nodo *z;
 
     z = a->dir;
     if (z->fator == -1)
-        a = rotacao_esquerda(a);
+        a = rotacao_esquerda(a, rotacoes);
     else
-        a = rotacao_dupla_esquerda(a);
+        a = rotacao_dupla_esquerda(a, rotacoes);
 
     a->fator = 0;
     *ok = 0;
@@ -111,7 +115,7 @@ Nodo *Caso2(Nodo *a, int *ok) {
     return a;
 }
 
-Nodo *InsereAvl(Nodo *a, Dados dados, int *ok) {
+Nodo *InsereAvl(Nodo *a, Dados dados, int *ok, int *rotacoes) {
     /* Insere nodo em uma árvore AVL, onde A representa a raiz da árvore,
      x, a chave a ser inserida e h a altura da árvore */
     if (a == NULL) {
@@ -122,7 +126,7 @@ Nodo *InsereAvl(Nodo *a, Dados dados, int *ok) {
         a->fator = 0;
         *ok = 1;
     } else if (strcmp(a->dados.nome, dados.nome) > 0) {
-        a->esq = InsereAvl(a->esq, dados, ok);
+        a->esq = InsereAvl(a->esq, dados, ok, rotacoes);
         if (*ok) {
             switch (a->fator) {
             case -1:
@@ -135,12 +139,12 @@ Nodo *InsereAvl(Nodo *a, Dados dados, int *ok) {
                 break;
 
             case 1:
-                a = Caso1(a, ok);
+                a = Caso1(a, ok, rotacoes);
                 break;
             }
         }
     } else {
-        a->dir = InsereAvl(a->dir, dados, ok);
+        a->dir = InsereAvl(a->dir, dados, ok, rotacoes);
         if (*ok) {
             switch (a->fator) {
             case 1:
@@ -153,7 +157,7 @@ Nodo *InsereAvl(Nodo *a, Dados dados, int *ok) {
                 break;
 
             case -1:
-                a = Caso2(a, ok);
+                a = Caso2(a, ok, rotacoes);
                 break;
             }
         }
