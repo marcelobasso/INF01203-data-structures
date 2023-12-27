@@ -20,9 +20,15 @@ Numero de Nodos: 1000
 Altura: 22
 Rotacoes: 0
 Comparacoes: 145
+Maior busca: 0.006000ms
+Menor busca: 0.004000ms
+Tempo total: 0.060000ms
 
 ======== ESTATÍSTICAS AVL ============
 Numero de Nodos: 1000
 Altura: 12
 Rotacoes: 445
-Comparacoes: 115
+Comparacoes: 260
+Maior busca: 0.006000ms
+Menor busca: 0.003000ms
+Tempo total: 0.052000ms

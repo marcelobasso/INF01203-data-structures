@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.heex": "html-eex",
+        "arvore_calorias.h": "c",
+        "string.h": "c"
+    }
+}
